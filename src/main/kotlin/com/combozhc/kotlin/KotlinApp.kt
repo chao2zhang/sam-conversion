@@ -32,6 +32,20 @@ private fun useIKtRunner() {
     }, 3)
 }
 
+private fun runIOverloadedKtRunner(runner: IOvderloadedKtRunner, id: Int) = runner.run(id)
+
+private fun useIOverloadedKtRunnerFix() {
+    val iKtRunner = IOvderloadedKtRunner {
+        id -> id % 2 == 0
+    }
+    runIOverloadedKtRunner(IOvderloadedKtRunner {
+        id -> id % 2 == 0
+    }, 3)
+    runIOverloadedKtRunner(IOvderloadedKtRunner {
+        id -> id % 2 == 0
+    }, 3)
+}
+
 private fun runFKtRunner(runner: FKtRunner, id: Int): Boolean {
     return runner(id)
 }
