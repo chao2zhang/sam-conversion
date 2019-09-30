@@ -1,5 +1,7 @@
 package com.combozhc.kotlin;
 
+import java.util.function.Function;
+
 public class JavaApp {
 
     private boolean isEven(int id) {
@@ -21,7 +23,7 @@ public class JavaApp {
     }
 
     private void useFJavaRunner() {
-        IJavaRunner iJavaRunner = id -> id % 2 == 0;
+        FJavaRunner fJavaRunner = id -> id % 2 == 0;
         runFJavaRunner(id -> id % 2 == 0, 3);
         runFJavaRunner(this::isEven, 3);
     }
@@ -38,7 +40,7 @@ public class JavaApp {
 
     private void useFKtRunner() {
         // Kotlin Typealias is not accessible in Java, hence the code below won't compile
-        // KtRunner fKtRunner = id -> id % 2 == 0;
+        // FKtRunner fKtRunner = id -> id % 2 == 0;
     }
 
     public static void main(String[] args) {
