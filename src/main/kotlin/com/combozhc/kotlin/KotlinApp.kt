@@ -2,70 +2,87 @@ package com.combozhc.kotlin
 
 private fun isEven(id: Int) = id % 2 == 0
 
-private fun runIJavaRunner(runner: IJavaRunner, id: Int) = runner.run(id)
+private fun invokeJavaFunction(id: Int, function: JavaFunction) = function.apply(id)
 
-private fun useIJavaRunner() {
-    val iJavaRunner = IJavaRunner { id -> id % 2 == 0 }
-    runIJavaRunner(IJavaRunner { id -> id % 2 == 0 }, 3)
-    runIJavaRunner(IJavaRunner { isEven(it) } , 3)
+private fun useJavaFunction() {
+    val javaFunction = JavaFunction { id -> id % 2 == 0 }
+    invokeJavaFunction(3, JavaFunction { id -> id % 2 == 0 })
+    invokeJavaFunction(4, JavaFunction { isEven(it) })
 }
 
-private fun runFJavaRunner(runner: FJavaRunner, id: Int) = runner.apply(id)
+private fun invokeJavaSam(id: Int, sam: JavaSam) = sam.apply(id)
 
-private fun useFJavaRunner() {
-    val iJavaRunner = FJavaRunner { id -> id % 2 == 0 }
-    runFJavaRunner(FJavaRunner { id -> id % 2 == 0 }, 3)
-    runFJavaRunner(FJavaRunner { isEven(it) } , 3)
+private fun useJavaSam() {
+    val javaSam = JavaSam { id -> id % 2 == 0 }
+    invokeJavaSam(3, JavaSam { id -> id % 2 == 0 })
+    invokeJavaSam(4, JavaSam { isEven(it) })
 }
 
-private fun runIKtRunner(runner: IKtRunner, id: Int) = runner.run(id)
+private fun invokeJavaSam2(id: Int, sam: JavaSam2) = sam.isEven(id) && sam.apply(id)
 
-private fun useIKtRunner() {
-    val iKtRunner = object : IKtRunner {
-        override fun run(id: Int) = id % 2 == 0
+private fun useJavaSam2() {
+    val javaSam = JavaSam2 { id -> id % 2 == 0 }
+    invokeJavaSam2(3, JavaSam2 { id -> id % 2 == 0 })
+    invokeJavaSam2(4, JavaSam2 { isEven(it) })
+}
+
+private fun invokeKotlinFunction(id: Int, f: KotlinFunction) = f(id)
+
+private fun useKotlinFunction() {
+    val kotlinFunction : KotlinFunction = { id -> id % 2 == 0 }
+    invokeKotlinFunction(3) { id -> id % 2 == 0 }
+    invokeKotlinFunction(4) { isEven(it) }
+    invokeKotlinFunction(4, ::isEven)
+}
+
+private fun invokeKotlinInterface(id: Int, i: KotlinInterface) = i.apply(id)
+
+private fun useKotlinInterface() {
+    val kotlinInterface = object : KotlinInterface {
+        override fun apply(id: Int) = id % 2 == 0
     }
-    runIKtRunner(object : IKtRunner {
-        override fun run(id: Int) = id % 2 == 0
-    }, 3)
-    runIKtRunner(object : IKtRunner {
-        override fun run(id: Int) = isEven(id)
-    }, 3)
+    invokeKotlinInterface(3, object : KotlinInterface {
+        override fun apply(id: Int) = id % 2 == 0
+    })
+    invokeKotlinInterface(4, object : KotlinInterface {
+        override fun apply(id: Int) = isEven(id)
+    })
 }
 
-private fun runIOverloadedKtRunner(runner: IOvderloadedKtRunner, id: Int) = runner.run(id)
+private fun invokeKotlinInterface2(id: Int, i: KotlinInterface2) = i.apply(id)
 
-private fun useIOverloadedKtRunnerFix() {
-    val iKtRunner = IOvderloadedKtRunner {
+private fun useKotlinInterface2() {
+    val kotlinInterface2 = KotlinInterface2 {
         id -> id % 2 == 0
     }
-    runIOverloadedKtRunner(IOvderloadedKtRunner {
+    invokeKotlinInterface2(3, KotlinInterface2 {
         id -> id % 2 == 0
-    }, 3)
-    runIOverloadedKtRunner(IOvderloadedKtRunner {
-        id -> id % 2 == 0
-    }, 3)
+    })
+    invokeKotlinInterface2(4, KotlinInterface2 {
+            id -> id % 2 == 0
+    })
 }
 
-private fun runFKtRunner(runner: FKtRunner, id: Int): Boolean {
-    return runner(id)
-}
+private fun invokeKotlinInterface3(id: Int, i: KotlinInterface3) = i.isEven(id) && i.apply(id)
 
-private fun useFKtRunner() {
-    val fKtRunner : FKtRunner = { id -> id % 2 == 0 }
-    runFKtRunner({ id -> id % 2 == 0 }, 3)
-    runFKtRunner(::isEven, 3)
-}
-
-class KotlinApp {
-
-    companion object {
-
-        @JvmStatic
-        fun main() {
-            useFJavaRunner()
-            useIJavaRunner()
-            useIKtRunner()
-            useFKtRunner()
-        }
+private fun useKotlinInterface3() {
+    val kotlinInterface3 = object : KotlinInterface3 {
+        override fun apply(id: Int) = id % 2 == 0
     }
+    invokeKotlinInterface3(3, object : KotlinInterface3 {
+        override fun apply(id: Int) = id % 2 == 0
+    })
+    invokeKotlinInterface3(4, object : KotlinInterface3 {
+        override fun apply(id: Int) = id % 2 == 0
+    })
+}
+
+fun main() {
+    useJavaFunction()
+    useJavaSam()
+    useJavaSam2()
+    useKotlinFunction()
+    useKotlinInterface()
+    useKotlinInterface2()
+    useKotlinInterface3()
 }

@@ -3,7 +3,7 @@ package com.combozhc.kotlin;
 import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface
-public interface IJavaRunner {
+public interface JavaSam {
 
-    boolean run(@NotNull Integer id);
+    boolean apply(@NotNull Integer id);
 }
