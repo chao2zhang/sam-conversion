@@ -64,15 +64,12 @@ private fun useKotlinInterface() {
 private fun invokeKotlinInterface2(id: Int, i: KotlinInterface2) = i.apply(id)
 
 private fun useKotlinInterface2() {
-    val kotlinInterface2 = KotlinInterface2 {
-        id -> id % 2 == 0
-    }
-    invokeKotlinInterface2(3, KotlinInterface2 {
-        id -> id % 2 == 0
-    })
-    invokeKotlinInterface2(4, KotlinInterface2 {
-            id -> id % 2 == 0
-    })
+    val kotlinInterface2 = KotlinInterface2 { id -> id % 2 == 0 }
+    invokeKotlinInterface2(3, KotlinInterface2 { id -> id % 2 == 0 })
+    invokeKotlinInterface2(4, KotlinInterface2 { isEven(it) })
+    // The following line does not compile
+    // invokeKotlinInterface2(3) {id -> id % 2 == 0}
+    // invokeKotlinInterface2(4, ::isEven)
 }
 
 private fun invokeKotlinInterface3(id: Int, i: KotlinInterface3) = i.isEven(id) && i.apply(id)
