@@ -6,7 +6,7 @@ public class JavaApp {
         return id % 2 == 0;
     }
 
-    private boolean invokeJavaSam(int id, JavaSam sam) {
+    public boolean invokeJavaSam(int id, JavaSam sam) {
         return sam.apply(id);
     }
 
@@ -16,7 +16,7 @@ public class JavaApp {
         invokeJavaSam(4, this::isEven);
     }
 
-    private boolean invokeJavaSam2(int id, JavaSam2 sam) {
+    public boolean invokeJavaSam2(int id, JavaSam2 sam) {
         return sam.isEven(id) && sam.apply(id);
     }
 
@@ -27,7 +27,7 @@ public class JavaApp {
     }
 
 
-    private boolean invokeJavaFunction(int id, JavaFunction function) {
+    public boolean invokeJavaFunction(int id, JavaFunction function) {
         return function.apply(id);
     }
 
@@ -38,8 +38,8 @@ public class JavaApp {
     }
 
     private void useKotlinFunction() {
-        // Kotlin Typealias is not accessible in Java, hence the code below won't compile
-        // KotlinFunction func = id -> id % 2 == 0;
+//         Kotlin Typealias is not accessible in Java, hence the code below won't compile
+//         KotlinFunction func = id -> id % 2 == 0;
     }
 
     private boolean invokeKotlinInterface(int id, KotlinInterface i) {
@@ -71,7 +71,6 @@ public class JavaApp {
         invokeKotlinInterface3(3, id -> id % 2 == 0);
         invokeKotlinInterface3(4, this::isEven);
     }
-
 
     public static void main(String[] args) {
         JavaApp javaApp = new JavaApp();

@@ -8,6 +8,10 @@ private fun useJavaFunction() {
     val javaFunction = JavaFunction { id -> id % 2 == 0 }
     invokeJavaFunction(3, JavaFunction { id -> id % 2 == 0 })
     invokeJavaFunction(4, JavaFunction { isEven(it) })
+
+    JavaApp().invokeJavaFunction(3) { id -> id % 2 == 0 }
+    JavaApp().invokeJavaFunction(4, ::isEven)
+    JavaApp().invokeJavaFunction(4) { isEven(it) }
 }
 
 private fun invokeJavaSam(id: Int, sam: JavaSam) = sam.apply(id)
@@ -16,6 +20,10 @@ private fun useJavaSam() {
     val javaSam = JavaSam { id -> id % 2 == 0 }
     invokeJavaSam(3, JavaSam { id -> id % 2 == 0 })
     invokeJavaSam(4, JavaSam { isEven(it) })
+
+    JavaApp().invokeJavaSam(3) { id -> id % 2 == 0 }
+    JavaApp().invokeJavaSam(4, ::isEven)
+    JavaApp().invokeJavaSam(4) { isEven(it) }
 }
 
 private fun invokeJavaSam2(id: Int, sam: JavaSam2) = sam.isEven(id) && sam.apply(id)
@@ -24,6 +32,10 @@ private fun useJavaSam2() {
     val javaSam = JavaSam2 { id -> id % 2 == 0 }
     invokeJavaSam2(3, JavaSam2 { id -> id % 2 == 0 })
     invokeJavaSam2(4, JavaSam2 { isEven(it) })
+
+    JavaApp().invokeJavaSam2(3) { id -> id % 2 == 0 }
+    JavaApp().invokeJavaSam2(4, ::isEven)
+    JavaApp().invokeJavaSam2(4) { isEven(it) }
 }
 
 private fun invokeKotlinFunction(id: Int, f: KotlinFunction) = f(id)
