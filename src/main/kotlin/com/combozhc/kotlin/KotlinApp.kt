@@ -1,10 +1,10 @@
 package com.combozhc.kotlin
 
-private fun isEven(id: Int) = id % 2 == 0
+fun isEven(id: Int) = id % 2 == 0
 
-private fun invokeJavaFunction(id: Int, function: JavaFunction) = function.apply(id)
+fun invokeJavaFunction(id: Int, function: JavaFunction) = function.apply(id)
 
-private fun useJavaFunction() {
+fun useJavaFunction() {
     val javaFunction = JavaFunction { id -> id % 2 == 0 }
     invokeJavaFunction(3, JavaFunction { id -> id % 2 == 0 })
     invokeJavaFunction(4, JavaFunction { isEven(it) })
@@ -14,9 +14,9 @@ private fun useJavaFunction() {
     JavaApp().invokeJavaFunction(4) { isEven(it) }
 }
 
-private fun invokeJavaSam(id: Int, sam: JavaSam) = sam.apply(id)
+fun invokeJavaSam(id: Int, sam: JavaSam) = sam.apply(id)
 
-private fun useJavaSam() {
+fun useJavaSam() {
     val javaSam = JavaSam { id -> id % 2 == 0 }
     invokeJavaSam(3, JavaSam { id -> id % 2 == 0 })
     invokeJavaSam(4, JavaSam { isEven(it) })
@@ -26,9 +26,9 @@ private fun useJavaSam() {
     JavaApp().invokeJavaSam(4) { isEven(it) }
 }
 
-private fun invokeJavaSam2(id: Int, sam: JavaSam2) = sam.isEven(id) && sam.apply(id)
+fun invokeJavaSam2(id: Int, sam: JavaSam2) = sam.isEven(id) && sam.apply(id)
 
-private fun useJavaSam2() {
+fun useJavaSam2() {
     val javaSam = JavaSam2 { id -> id % 2 == 0 }
     invokeJavaSam2(3, JavaSam2 { id -> id % 2 == 0 })
     invokeJavaSam2(4, JavaSam2 { isEven(it) })
@@ -38,18 +38,18 @@ private fun useJavaSam2() {
     JavaApp().invokeJavaSam2(4) { isEven(it) }
 }
 
-private fun invokeKotlinFunction(id: Int, f: KotlinFunction) = f(id)
+fun invokeKotlinFunction(id: Int, f: KotlinFunction) = f(id)
 
-private fun useKotlinFunction() {
+fun useKotlinFunction() {
     val kotlinFunction : KotlinFunction = { id -> id % 2 == 0 }
     invokeKotlinFunction(3) { id -> id % 2 == 0 }
     invokeKotlinFunction(4) { isEven(it) }
     invokeKotlinFunction(4, ::isEven)
 }
 
-private fun invokeKotlinInterface(id: Int, i: KotlinInterface) = i.apply(id)
+fun invokeKotlinInterface(id: Int, i: KotlinInterface) = i.apply(id)
 
-private fun useKotlinInterface() {
+fun useKotlinInterface() {
     val kotlinInterface = object : KotlinInterface {
         override fun apply(id: Int) = id % 2 == 0
     }
@@ -61,9 +61,9 @@ private fun useKotlinInterface() {
     })
 }
 
-private fun invokeKotlinInterface2(id: Int, i: KotlinInterface2) = i.apply(id)
+fun invokeKotlinInterface2(id: Int, i: KotlinInterface2) = i.apply(id)
 
-private fun useKotlinInterface2() {
+fun useKotlinInterface2() {
     val kotlinInterface2 = KotlinInterface2 { id -> id % 2 == 0 }
     invokeKotlinInterface2(3, KotlinInterface2 { id -> id % 2 == 0 })
     invokeKotlinInterface2(4, KotlinInterface2 { isEven(it) })
@@ -72,9 +72,9 @@ private fun useKotlinInterface2() {
     // invokeKotlinInterface2(4, ::isEven)
 }
 
-private fun invokeKotlinInterface3(id: Int, i: KotlinInterface3) = i.isEven(id) && i.apply(id)
+fun invokeKotlinInterface3(id: Int, i: KotlinInterface3) = i.isEven(id) && i.apply(id)
 
-private fun useKotlinInterface3() {
+fun useKotlinInterface3() {
     val kotlinInterface3 = object : KotlinInterface3 {
         override fun apply(id: Int) = id % 2 == 0
     }

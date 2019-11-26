@@ -1,45 +1,48 @@
 package com.combozhc.kotlin;
 
+import kotlin.jvm.functions.Function1;
+
 public class JavaApp {
 
     private boolean isEven(int id) {
         return id % 2 == 0;
     }
 
-    public boolean invokeJavaSam(int id, JavaSam sam) {
+    public boolean invokeJavaSam(int id, com.combozhc.kotlin.JavaSam sam) {
         return sam.apply(id);
     }
 
     private void useJavaSam() {
-        JavaSam javaSam = id -> id % 2 == 0;
+        com.combozhc.kotlin.JavaSam javaSam = id -> id % 2 == 0;
         invokeJavaSam(3, id -> id % 2 == 0);
         invokeJavaSam(4, this::isEven);
     }
 
-    public boolean invokeJavaSam2(int id, JavaSam2 sam) {
+    public boolean invokeJavaSam2(int id, com.combozhc.kotlin.JavaSam2 sam) {
         return sam.isEven(id) && sam.apply(id);
     }
 
     private void useJavaSam2() {
-        JavaSam2 javaSam2 = id -> id % 2 == 0;
+        com.combozhc.kotlin.JavaSam2 javaSam2 = id -> id % 2 == 0;
         invokeJavaSam2(3, id -> id % 2 == 0);
         invokeJavaSam2(4, this::isEven);
     }
 
 
-    public boolean invokeJavaFunction(int id, JavaFunction function) {
+    public boolean invokeJavaFunction(int id, com.combozhc.kotlin.JavaFunction function) {
         return function.apply(id);
     }
 
     private void useJavaFunction() {
-        JavaFunction javaFunction = id -> id % 2 == 0;
+        com.combozhc.kotlin.JavaFunction javaFunction = id -> id % 2 == 0;
         invokeJavaFunction(3, id -> id % 2 == 0);
         invokeJavaFunction(4, this::isEven);
     }
 
     private void useKotlinFunction() {
-//         Kotlin Typealias is not accessible in Java, hence the code below won't compile
-//         KotlinFunction func = id -> id % 2 == 0;
+        Function1<Integer, Boolean> kotlinFunc = id -> id % 2 == 0;
+        KotlinAppKt.invokeKotlinFunction(3, id -> id % 2 == 0);
+        KotlinAppKt.invokeKotlinFunction(4, this::isEven);
     }
 
     private boolean invokeKotlinInterface(int id, KotlinInterface i) {
@@ -77,6 +80,7 @@ public class JavaApp {
         javaApp.useJavaFunction();
         javaApp.useJavaSam();
         javaApp.useJavaSam2();
+        javaApp.useKotlinFunction();
         javaApp.useKotlinInterface();
         javaApp.useKotlinInterface2();
         javaApp.useKotlinInterface3();
